@@ -1,0 +1,19 @@
+<h2>My Pokemons</h2>
+<ul class="pokemons">
+  <li *ngFor="let pokemon of pokemons" (click)="onSelect(pokemon)" [class.selected]="pokemon === selectedPokemon">
+    <div><span class="badge">{{pokemon.name}}</span> {{pokemon.url}}
+    <div class="infoPanel"
+         *ngIf=
+           "selectedPokemon &&
+           pokemon.name == selectedPokemon.name &&
+           selectedPokemonInfo"
+    >
+
+      <h2>{{selectedPokemonInfo.name | uppercase}} Details</h2>
+      <div><span>ID: </span>{{selectedPokemonInfo.id}}</div>
+      <div><span>Weight: </span>{{selectedPokemonInfo.weight}}</div>
+      <div><span>Number of possible abilities: </span>{{selectedPokemonInfo.abilities.length}}</div>
+    </div>
+    </div>
+  </li>
+</ul>
