@@ -1,60 +1,56 @@
 /* pokemonsComponent's private CSS styles */
-.pokemons {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
+.poke-sprite{
+  float: right;
+}
+
+.poke-title{
+  padding-left: 10%;
+}
+
+.poke-accordion-item {
+  display: block;
+  border: solid 1px #ccc;
   width: 80%;
+  margin-left: 10%;
 }
-.pokemons .infoPanel {
-  position: relative;
-  z-index: 1;
-  background-color: #DDD;
-  color: black;
-  width: 50%;
-  border-radius: 1px;
+
+.poke-accordion-item + .poke-accordion-item {
+  border-top: none;
 }
-.pokemons li {
+
+.poke-accordion-header{
+  padding: 8px;
+}
+.poke-accordion-body {
+  padding: 16px;
+}
+.poke-accordion-body h2 {
+  margin-top: 0;
+}
+.poke-accordion-header:hover {
   cursor: pointer;
-  position: relative;
-  left: 0;
-  background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
-  border-radius: 4px;
+  background-color: #eee;
 }
-.pokemons li:hover {
-  color: #2c3a41;
-  background-color: #e6e6e6;
-  left: .1em;
+
+.poke-accordion-item:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
-.pokemons li.selected {
-  background-color: black;
-  color: white;
+
+.poke-accordion-item:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
-.pokemons li.selected:hover {
-  background-color: #505050;
-  color: white;
-}
-.pokemons li.selected:active {
-  background-color: black;
-  color: white;
-}
+
 .pokemons .badge {
   display: inline-block;
-  font-size: small;
+  font-size: large;
   color: white;
   padding: 0.8em 0.7em 0 0.7em;
   background-color:#405061;
   line-height: 1em;
   position: relative;
   left: -1px;
-  top: -4px;
   height: 1.8em;
   margin-right: .8em;
-  border-radius: 4px 0 0 4px;
-}
-
-input {
-  padding: .5rem;
 }

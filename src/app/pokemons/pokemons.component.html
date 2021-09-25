@@ -1,19 +1,56 @@
-<h2>My Pokemons</h2>
-<ul class="pokemons">
-  <li *ngFor="let pokemon of pokemons" (click)="onSelect(pokemon)" [class.selected]="pokemon === selectedPokemon">
-    <div><span class="badge">{{pokemon.name}}</span> {{pokemon.url}}
-    <div class="infoPanel"
-         *ngIf=
-           "selectedPokemon &&
-           pokemon.name == selectedPokemon.name &&
-           selectedPokemonInfo"
+<div class="poke-title"><h2>My Pokemons</h2></div>
+<cdk-accordion class="pokemons">
+  <cdk-accordion-item
+    *ngFor="let pokemon of pokemons; let index = index;"
+    #accordionItem="cdkAccordionItem"
+    class="poke-accordion-item"
+    role="button"
+    tabindex="0"
+    [attr.id]="'accordion-header-' + index"
+    [attr.aria-expanded]="accordionItem.expanded"
+    [attr.aria-controls]="'accordion-body-' + index"
+    [class.selected]="pokemon === pokemon">
+    <div class="poke-accordion-header" (click)="accordionItem.toggle(); getPokemon(pokemon.url, index)">
+      <span class="badge">{{pokemon.name | titlecase}}</span> {{pokemon.url}}
+    </div>
+    <div class="poke-accordion-body"
+         role="region"
+         [style.display]="accordionItem.expanded ? '' : 'none'"
+         [attr.id]="'accordion-body-' + index"
+         [attr.aria-labelledby]="'accordion-header-' + index"
+         *ngIf="pokemonInfo[index]"
     >
-
-      <h2>{{selectedPokemonInfo.name | uppercase}} Details</h2>
-      <div><span>ID: </span>{{selectedPokemonInfo.id}}</div>
-      <div><span>Weight: </span>{{selectedPokemonInfo.weight}}</div>
-      <div><span>Number of possible abilities: </span>{{selectedPokemonInfo.abilities.length}}</div>
+      <h2>{{pokemonInfo[index].name | uppercase}} Details</h2>
+      <img class="poke-sprite" src="{{pokemonInfo[index].sprites.front_default}}" alt="pokemon-sprite"/>
+      <div><span>ID: </span>{{pokemonInfo[index].id}}</div>
+      <div><span>Weight: </span>{{pokemonInfo[index].weight}}</div>
+      <div>
+        <h3>Abilities: </h3>
+        <cdk-accordion class="abilities">
+          <cdk-accordion-item
+            *ngFor="let ability of pokemonInfo[index].abilities"
+            #accordionItem="cdkAccordionItem"
+            class="poke-accordion-item"
+            role="button"
+            tabindex="0"
+            [attr.id]="'ability-accordion-header-' + index"
+            [attr.aria-expanded]="accordionItem.expanded"
+            [attr.aria-controls]="'ability-accordion-body-' + index">
+            <div class="poke-accordion-header" (click)="accordionItem.toggle(); getAbility(ability.ability.url, index)">
+              <span class="badge">{{ability.ability.name | titlecase}}</span> {{ability.ability.url}}
+            </div>
+            <div class="poke-accordion-body"
+                 role="region"
+                 [style.display]="accordionItem.expanded ? '' : 'none'"
+                 [attr.id]="'ability-accordion-body-' + index"
+                 [attr.aria-labelledby]="'ability-accordion-header-' + index"
+                 *ngIf="abilities[index]"
+            >
+              {{abilities[index].en_desc}}
+            </div>
+          </cdk-accordion-item>
+        </cdk-accordion>
+      </div>
     </div>
-    </div>
-  </li>
-</ul>
+  </cdk-accordion-item>
+</cdk-accordion>
